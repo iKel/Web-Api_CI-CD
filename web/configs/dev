@@ -1,0 +1,4 @@
+v = 0.2
+replicas = 1 
+namespace = app-dev
+app_hostname = app.dev.khlyuzdainic.com

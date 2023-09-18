@@ -1,0 +1,25 @@
+services:
+  webcontainer:
+    build: web/
+    ports:
+      - "80:80"
+    networks:
+      - appnetwork
+    environment:
+      API_HOST: "http://apicontainer:3000"
+  apicontainer:
+    build: api/
+    networks:
+      - appnetwork
+    environment:
+      DB: "postgres://pgadmin:crackers@dbcontainer/sampledb"
+  dbcontainer:
+    image: "postgres:10"
+    environment:
+      POSTGRES_PASSWORD: "crackers"
+      POSTGRES_USER: "pgadmin"
+      POSTGRES_DB: "sampledb"
+    networks:
+      - appnetwork
+networks:
+  appnetwork:

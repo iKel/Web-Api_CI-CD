@@ -1,0 +1,4 @@
+v = 0.3
+replicas = 1 
+namespace = app-staging
+app_hostname = app.stage.khlyuzdainic.com

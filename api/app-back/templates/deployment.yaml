@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.bc.app.name }}
+  labels:
+    app: {{ .Values.bc.app.name }}
+spec:
+  replicas: {{ .Values.replica }}
+  selector:
+    matchLabels:
+      app: {{ .Values.bc.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.bc.app.name }}
+    spec:
+      containers:
+      - name: {{ .Values.bc.app.name }}
+        image: "{{ .Values.image.repo }}:{{ .Values.version }}"
+        env:
+        - name: PORT
+          value: "3000"
+        - name: DB
+          value: "postgres://pgadmin:crackers@postgres-svc.default/sampledb"
+        ports:
+        - containerPort: {{ .Values.port }}
